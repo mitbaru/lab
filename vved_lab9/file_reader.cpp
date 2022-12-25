@@ -1,5 +1,5 @@
 #include "file_reader.h"
-#include "constants.h"
+#include "const.h"
 
 #include <fstream>
 #include <cstring>
@@ -17,7 +17,16 @@ date convert(char* str)
     return result;
 }
 
-void read(const char* file_name, book_subscription* array[], int& size)
+mark convert1(char* str)
+{
+    mark result;
+    char* context = NULL;
+    char* str_number = strtok_s(str, " ", &context);
+    result.num = atoi(str_number);
+    return result;
+}
+
+void read(const char* file_name, session_data* array[], int& size)
 {
     std::ifstream file(file_name);
     if (file.is_open())
@@ -26,19 +35,17 @@ void read(const char* file_name, book_subscription* array[], int& size)
         char tmp_buffer[MAX_STRING_SIZE];
         while (!file.eof())
         {
-            book_subscription* item = new book_subscription;
-            file >> item->reader.last_name;
-            file >> item->reader.first_name;
-            file >> item->reader.middle_name;
+            session_data* item = new session_data;
+            file >> item->student.last_name;
+            file >> item->student.first_name;
+            file >> item->student.middle_name;
             file >> tmp_buffer;
-            item->start = convert(tmp_buffer);
+            item->exam_date = convert(tmp_buffer);
             file >> tmp_buffer;
-            item->finish = convert(tmp_buffer);
-            file >> item->author.last_name;
-            file >> item->author.first_name;
-            file >> item->author.middle_name;
+            item->exam_mark = convert1(tmp_buffer);
+            file >> item->sub_name.first_name;
+            file >> item->sub_name.second_name;
             file.read(tmp_buffer, 1); // чтения лишнего символа пробела
-            file.getline(item->title, MAX_STRING_SIZE);
             array[size++] = item;
         }
         file.close();

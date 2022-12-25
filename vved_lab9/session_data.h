@@ -1,8 +1,8 @@
 #pragma once
-#ifndef BOOK_SUBSCRIPTION_H
-#define BOOK_SUBSCRIPTION_H
+#ifndef SESSION_DATA_H
+#define SESSION_DATA_H
 
-#include "constants.h"
+#include "const.h"
 
 struct date
 {
@@ -18,13 +18,23 @@ struct person
     char last_name[MAX_STRING_SIZE];
 };
 
-struct book_subscription
+struct mark
 {
-    person reader;
-    date start;
-    date finish;
-    person author;
-    char title[MAX_STRING_SIZE];
+    int num;
+};
+
+struct subject
+{
+    char first_name[MAX_STRING_SIZE];
+    char second_name[MAX_STRING_SIZE];
+};
+
+struct session_data
+{
+    person student;       //reader
+    date exam_date;           //start
+    mark exam_mark;              //finish
+    subject sub_name;        //author
 };
 
 #endif

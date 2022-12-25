@@ -2,8 +2,8 @@
 #ifndef FILE_READER_H
 #define FILE_READER_H
 
-#include "book_subscription.h"
+#include "session_data.h"
 
-void read(const char* file_name, book_subscription* array[], int& size);
+void read(const char* file_name, session_data* array[], int& size);
 
 #endif
